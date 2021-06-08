@@ -6,7 +6,36 @@ import Loader from "./components/Loader";
 
 function App() {
   // Loader state
+  const [makeRequest, setMakeRequest] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [cocktail, setCocktail] = useState("");
+
+  useEffect(() => {
+    if (makeRequest) {
+
+      // Show loader
+      setIsLoading(true);
+
+      axios
+        .get(`www.thecocktaildb.com/api/json/v1/1/random.php`)
+        .then((res) => {
+          setCocktail(res.data);
+        });
+    }
+  }, [makeRequest]);
+
+  // Just for testing
+  useEffect(() => {
+    console.log(cocktail)
+  }, [cocktail]);
+
+  /**
+   * This will change the makeRequest state to true,
+   * in turn firing the API call
+   */
+  const handleClick = () => {
+    setMakeRequest(true);
+  };
 
   return (
     <div className="App">
@@ -26,13 +55,7 @@ function App() {
               src="/cocktail_one.svg"
               alt="cocktail"
             ></img>
-            <Button
-              onClick={() => {
-                setIsLoading(true)
-              }}
-            >
-              Generate a cocktail
-            </Button>
+            <Button onClick={handleClick}>Generate a cocktail</Button>
           </>
         )}
       </Container>
