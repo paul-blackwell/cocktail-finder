@@ -12,14 +12,22 @@ function App() {
 
   useEffect(() => {
     if (makeRequest) {
+      console.log("I was fired");
       // Show loader
       setIsLoading(true);
       const request = async () => {
         axios
-          .get("https://cors-anywhere.herokuapp.com/http://thecocktaildb.com/api/json/v1/1/random.php")
+          .get(
+            "https://cors-anywhere.herokuapp.com/http://thecocktaildb.com/api/json/v1/1/random.php"
+          )
           .then((res) => {
-            setCocktail(res.data);
-          },)
+            // Make res take 3 seconds longer just to show loader for longer
+            setTimeout(() => {
+              setCocktail(res.data);
+              setIsLoading(false);
+            }, 3000);
+            setMakeRequest(false);
+          })
           .catch((error) => {
             console.log(error);
           });
