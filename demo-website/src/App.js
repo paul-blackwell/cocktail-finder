@@ -12,21 +12,25 @@ function App() {
 
   useEffect(() => {
     if (makeRequest) {
-
       // Show loader
       setIsLoading(true);
-
-      axios
-        .get(`www.thecocktaildb.com/api/json/v1/1/random.php`)
-        .then((res) => {
-          setCocktail(res.data);
-        });
+      const request = async () => {
+        axios
+          .get("https://cors-anywhere.herokuapp.com/http://thecocktaildb.com/api/json/v1/1/random.php")
+          .then((res) => {
+            setCocktail(res.data);
+          },)
+          .catch((error) => {
+            console.log(error);
+          });
+      };
+      request();
     }
   }, [makeRequest]);
 
   // Just for testing
   useEffect(() => {
-    console.log(cocktail)
+    console.log(cocktail);
   }, [cocktail]);
 
   /**
