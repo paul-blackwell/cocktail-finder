@@ -3,6 +3,7 @@ import Container from "./components/Container";
 import axios from "axios";
 import Button from "./components/Button";
 import Loader from "./components/Loader";
+import IngredientsList from "./components/IngredientsList";
 
 function App() {
   // Loader state
@@ -24,19 +25,18 @@ function App() {
           .then((res) => {
             // Make res take 3 seconds longer just to show loader for longer
             setTimeout(() => {
-
               /**
                * As the API doesn't return the ingredients as an array we will
                * have to make one containing all the ingredients. Then will will
                * setCocktail state to the response and add our new array to it.
                */
               const ingredients = [];
-               for (const [key, value] of Object.entries(res.data.drinks[0])) {
-                if(key.includes('strIngredient') && value !== null){
-                   ingredients.push(`${value}`);
+              for (const [key, value] of Object.entries(res.data.drinks[0])) {
+                if (key.includes("strIngredient") && value !== null) {
+                  ingredients.push(`${value}`);
                 }
               }
-              setCocktail({...res.data.drinks[0], ingredients: ingredients});
+              setCocktail({ ...res.data.drinks[0], ingredients: ingredients });
               setIsLoading(false);
             }, 3000);
             setMakeRequest(false);
@@ -62,9 +62,7 @@ function App() {
     setMakeRequest(true);
   };
 
-  if(cocktail !== '') {
-    
-  }
+
 
   return (
     <div className="App">
@@ -87,7 +85,7 @@ function App() {
             <Button onClick={handleClick}>Generate a cocktail</Button>
           </>
         )}
-        {cocktail !== '' && !isLoading && (
+        {cocktail !== "" && !isLoading && (
           <>
             <h1 className="text-blueGray-800 text-4xl font-extrabold mb-5 mt-4">
               {cocktail.strDrink}
@@ -97,12 +95,16 @@ function App() {
               src={cocktail.strDrinkThumb}
               alt="cocktail"
             ></img>
-            <p className="font-bold text-lg w-full mb-2 text-blueGray-800">📙 Instructions</p>
-            <p className="mb-8 text-blueGray-500 text-base">{cocktail.strInstructions}</p>
-            <p className="font-bold text-lg w-full mb-2 text-blueGray-800">🍹 Ingredients</p>
-            <ul className="mb-8 text-blueGray-500 text-base w-full list-inside">
-                <li>Some Ingredient</li>
-            </ul>
+            <p className="font-bold text-lg w-full mb-2 text-blueGray-800">
+              📙 Instructions
+            </p>
+            <p className="mb-8 text-blueGray-500 text-base">
+              {cocktail.strInstructions}
+            </p>
+            <p className="font-bold text-lg w-full mb-2 text-blueGray-800">
+              🍹 Ingredients
+            </p>
+            <IngredientsList ingredients={cocktail.ingredients} />
             <Button onClick={handleClick}>Generate a cocktail</Button>
           </>
         )}
