@@ -8,7 +8,7 @@ import IngredientsList from "./components/IngredientsList";
 function App() {
   // Loader state
   const [makeRequest, setMakeRequest] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [cocktail, setCocktail] = useState("");
 
   useEffect(() => {

@@ -1,14 +1,14 @@
-import React from 'react'
+import React from "react";
+import AnimatedSVG from '../SVG/AnimatedSVG';
 
 export default function Loader() {
-    return (
-        <div>
-            <img
-              className="w-auto h-image mb-12 mt-12"
-              src="/cocktail_two.svg"
-              alt="cocktail"
-            ></img>
-            <p className="text-center text-blueGray-500 mb-12">Loading ...</p>
+
+  return (
+    <div className="svgContainer">
+        <div className="mt-4">
+        <AnimatedSVG />
         </div>
-    )
+      <p className="text-center text-blueGray-500 mt-4 mb-4">Loading ...</p>
+    </div>
+  );
 }
