@@ -49,11 +49,6 @@ function App() {
     }
   }, [makeRequest]);
 
-  // Just for testing
-  useEffect(() => {
-    console.log(cocktail.ingredients);
-  }, [cocktail]);
-
   /**
    * This will change the makeRequest state to true,
    * in turn firing the API call
@@ -61,8 +56,6 @@ function App() {
   const handleClick = () => {
     setMakeRequest(true);
   };
-
-
 
   return (
     <div className="App">
@@ -91,14 +84,14 @@ function App() {
               {cocktail.strDrink}
             </h1>
             <img
-              className="w-auto h-image mt-8 mb-12 rounded-lg"
+              className="w-full h-image mt-8 mb-12 rounded-lg object-cover shadow-inner"
               src={cocktail.strDrinkThumb}
               alt="cocktail"
             ></img>
             <p className="font-bold text-lg w-full mb-2 text-blueGray-800">
               📙 Instructions
             </p>
-            <p className="mb-8 text-blueGray-500 text-base">
+            <p className="mb-8 text-blueGray-500 text-base w-full">
               {cocktail.strInstructions}
             </p>
             <p className="font-bold text-lg w-full mb-2 text-blueGray-800">
